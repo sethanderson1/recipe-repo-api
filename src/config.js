@@ -5,4 +5,3 @@ module.exports = {
     TEST_DATABASE_URL: process.env.TEST_DATABASE_URL || 'postgresql://dunder_mifflin:p@localhost/recipe-repo-test',
     CLIENT_ORIGIN: process.env.CLIENT_ORIGIN || 3000
   }
-  
