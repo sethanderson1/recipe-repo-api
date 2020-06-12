@@ -1,8 +1,9 @@
 const express = require('express');
+const morgan = require('morgan');
 const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
-app.use(morgan(morganSetting))
 
 const app = express();
+app.use(morgan(morganSetting))
 
 const PORT = process.env.PORT || 3000;
 
