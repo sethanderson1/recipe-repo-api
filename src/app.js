@@ -23,7 +23,7 @@ app.get('/api/*', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.json('hello world');
+    res.send('Hello, world!');
 });
 
 app.use(function errorHandler(error, req, res, next) {
