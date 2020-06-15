@@ -3,7 +3,7 @@ CREATE TABLE users (
     user_name TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     date_created TIMESTAMP DEFAULT now() NOT NULL,
-    date_modified TIMESTAMP
+    date_modified TIMESTAMPTZ NOT NULL DEFAULT now()
 ); 
 
 ALTER TABLE recipes
