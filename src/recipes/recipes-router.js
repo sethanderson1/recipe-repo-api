@@ -68,8 +68,6 @@ recipesRouter
     .all(requireAuth)
     .all((req, res, next) => {
         const { id } = req.user
-        const { recipe_id } = req.params
-        const db = req.app.get('db')
         RecipesService.getById(
             req.app.get('db'),
             req.params.recipe_id
