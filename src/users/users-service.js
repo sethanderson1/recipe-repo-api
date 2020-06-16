@@ -46,9 +46,9 @@ const UsersService = {
         return {
             id: user.id,
             user_name: xss(user.user_name),
-            password: xss(user.password),
-            date_created: new Date(user.date_created),
-            date_modified: new Date(user.date_modified),
+            // todo: do i need password? should not be in res.body? so not here either?
+            date_created: user.date_created,
+            date_modified: null,
         }
     }
 }
