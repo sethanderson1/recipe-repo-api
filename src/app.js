@@ -27,10 +27,6 @@ app.use(`/api/auth`, authRouter)
 app.use(`/api/categories`, categoriesRouter)
 app.use(`/api/recipes`, recipesRouter)
 
-// app.get('/api/*', (req, res) => {
-//     res.json({ ok: true });
-// });
-
 // app.get('/', (req, res) => {
 //     res.send('Hello, world!');
 // });
