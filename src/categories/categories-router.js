@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const CategoriesService = require('./categories-service')
-const requireAuth = require('../middleware/jwt-auth')
+const {requireAuth} = require('../middleware/jwt-auth')
 const categoriesRouter = express.Router()
 const jsonParser = express.json()
 
@@ -29,8 +29,8 @@ categoriesRouter
         }
     })
     .post(jsonParser, (req, res, next) => {
-        const { user_id } = req.user
-        req.body.author_id = user_id
+        const { id } = req.user
+        req.body.author_id = id
         const { category_name, author_id } = req.body
         const newCategory = { category_name, author_id }
         const db = req.app.get('db')
@@ -57,7 +57,7 @@ categoriesRouter
     .route('/:category_id')
     .all(requireAuth)
     .all((req, res, next) => {
-        const { user_id } = req.user
+        const { id } = req.user
         const { category_id } = req.params
         const db = req.app.get('db')
         CategoriesService.getById(
@@ -76,7 +76,7 @@ categoriesRouter
                         })
                 }
                 console.log('category', category)
-                if (category.author_id !== user_id) {
+                if (category.author_id !== id) {
                     return res.status(403)
                         .json({
                             error: {
@@ -102,27 +102,27 @@ categoriesRouter
             })
             .catch(next)
     })
-// .patch(jsonParser, (req, res, next) => {
-//     const { category_name } = req.body
-//     const categoryToUpdate = { category_name }
+.patch(jsonParser, (req, res, next) => {
+    const { category_name } = req.body
+    const categoryToUpdate = { category_name }
 
-//     const numberOfValues = Object.values(categoryToUpdate).filter(Boolean).length
-//     if (numberOfValues === 0) {
-//         return res.json({
-//             error: {
-//                 message: `Request body must contain 'category_name`
-//             }
-//         })
-//     }
-//     CategoriesService.updateCategory(
-//         req.app.get('db'),
-//         req.params.category_id,
-//         categoryToUpdate
-//     )
-//         .then(numRowsAffected => {
-//             res.status(204).end()
-//         })
-//         .catch(next)
-// })
+    const numberOfValues = Object.values(categoryToUpdate).filter(Boolean).length
+    if (numberOfValues === 0) {
+        return res.json({
+            error: {
+                message: `Request body must contain 'category_name`
+            }
+        })
+    }
+    CategoriesService.updateCategory(
+        req.app.get('db'),
+        req.params.category_id,
+        categoryToUpdate
+    )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+})
 
 module.exports = categoriesRouter
