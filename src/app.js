@@ -8,7 +8,7 @@ const { CLIENT_ORIGIN } = require('./config');
 const usersRouter = require('./users/users-router')
 const authRouter = require('./auth/auth-router')
 const categoriesRouter = require('./categories/categories-router')
-
+const recipesRouter = require('./recipes/recipes-router')
 
 const app = express()
 
@@ -25,6 +25,7 @@ app.use(helmet())
 app.use(`/api/users`, usersRouter)
 app.use(`/api/auth`, authRouter)
 app.use(`/api/categories`, categoriesRouter)
+app.use(`/api/recipes`, recipesRouter)
 
 // app.get('/api/*', (req, res) => {
 //     res.json({ ok: true });
