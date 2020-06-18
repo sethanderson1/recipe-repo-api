@@ -16,7 +16,7 @@ categoriesRouter
     .route('/')
     .all(requireAuth)
     .get(async (req, res, next) => {
-        console.log('req.user', req.user)
+        // console.log('req.user', req.user)
         const { id } = req.user
         const db = req.app.get('db')
         try {

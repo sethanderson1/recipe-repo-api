@@ -10,7 +10,7 @@ recipesRouter
     .route('/')
     .all(requireAuth)
     .get(async (req, res, next) => {
-        console.log('req.user', req.user)
+        // console.log('req.user', req.user)
         const { id } = req.user
         const db = req.app.get('db')
         try {
@@ -43,24 +43,37 @@ recipesRouter
             category_id,
             author_id
         }
+        console.log('newRecipe', newRecipe)
 
-        for (const [key, value] of Object.entries(newRecipe))
-            if (!value)
-                return res.status(400).json({
-                    error: { message: `Missing '${key}' in request body` }
-                })
+        if (!newRecipe.title) {
+            return res.status(400).json({
+                error: { message: `Must at least contain a title` }
+            })
+        }
+
+        // for (const [key, value] of Object.entries(newRecipe)) {
+        //     if (!value) {
+        //         console.log('value', value)
+        //         return res.status(400).json({
+        //             error: { message: `Missing '${key}' in request body` }
+        //         })
+        //     }
+        // }
+
 
         RecipesService.insertRecipe(
             req.app.get('db'),
             newRecipe
         )
             .then(recipe => {
+                console.log('recipe', recipe)
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${recipe.id}`))
                     .json(RecipesService.serializeRecipe(recipe))
             })
-            .catch(next)
+            .catch(err => console.log(err))
+        // .next()
     })
 
 recipesRouter
