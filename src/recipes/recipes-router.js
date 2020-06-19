@@ -73,7 +73,7 @@ recipesRouter
                     .json(RecipesService.serializeRecipe(recipe))
             })
             .catch(err => console.log(err))
-        // .next()
+            // .next()
     })
 
 recipesRouter
@@ -153,7 +153,8 @@ recipesRouter
             .then(numRowsAffected => {
                 res.status(204).end()
             })
-            .catch(next)
+            .catch(err => console.log(err))
+            // .next()
     })
 
 module.exports = recipesRouter
