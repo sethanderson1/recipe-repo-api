@@ -61,8 +61,8 @@ VALUES
  '2023-03-22T16:28:32.615Z',
  2,
  1),
-(4,'user2s recipe for category2', '2','2','2', '2023-03-22T16:28:32.615Z', '2023-03-22T16:28:32.615Z',2,2),
-(5,'user3s recipe for category3', '3','3','3', '2023-03-22T16:28:32.615Z', '2023-03-22T16:28:32.615Z',3,3);
+(4,'user2s recipe for category2', '2','2','2', '2023-03-22T16:28:32.615Z', '2023-03-22T16:28:32.615Z',3,2),
+(5,'user3s recipe for category3', '3','3','3', '2023-03-22T16:28:32.615Z', '2023-03-22T16:28:32.615Z',4,3);
 
 SELECT setval('recipes_id_seq', (SELECT MAX(id) from "recipes"));
 SELECT setval('categories_id_seq', (SELECT MAX(id) from "categories"));

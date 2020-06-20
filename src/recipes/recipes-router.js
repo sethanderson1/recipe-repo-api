@@ -80,6 +80,7 @@ recipesRouter
     .route('/:recipe_id')
     .all(requireAuth)
     .all((req, res, next) => {
+        console.log(':recipe_id path')
         const { id } = req.user
         RecipesService.getById(
             req.app.get('db'),
@@ -96,6 +97,7 @@ recipesRouter
                         })
                 }
                 if (recipe.author_id !== id) {
+                    console.log('Forbidden path')
                     return res.status(403)
                         .json({
                             error: {
@@ -109,6 +111,8 @@ recipesRouter
             .catch(next)
     })
     .get((req, res, next) => {
+        console.log(':recipe_id path')
+
         res.status(200).json(RecipesService.serializeRecipe(res.recipe))
     })
     .delete((req, res, next) => {

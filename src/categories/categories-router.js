@@ -66,6 +66,7 @@ categoriesRouter
             category_id
         )
             .then(category => {
+                console.log('console log works here')
                 if (!category) {
 
                     return res

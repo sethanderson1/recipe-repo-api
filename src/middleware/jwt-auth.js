@@ -11,6 +11,7 @@ function requireAuth(req, res, next) {
     } else {
         bearerToken = authToken.slice(7, authToken.length);
         console.log('bearerToken', bearerToken)
+
     }
 
     try {
@@ -33,6 +34,7 @@ function requireAuth(req, res, next) {
                 next(err);
             });
     } catch (error) {
+        console.log('Unauthorized request')
         res.status(401).json({ error: 'Unauthorized request' });
     }
 }
