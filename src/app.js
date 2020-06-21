@@ -28,9 +28,9 @@ app.use(`/api/auth`, authRouter)
 app.use(`/api/categories`, categoriesRouter)
 app.use(`/api/recipes`, recipesRouter)
 
-// app.get('/', (req, res) => {
-//     res.send('Hello, world!');
-// });
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
 
 app.use(function errorHandler(error, req, res, next) {
     let response
