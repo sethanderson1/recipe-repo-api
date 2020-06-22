@@ -6,11 +6,11 @@ const db = knex({
   client: 'pg',
   connection: DATABASE_URL,
 })
-app.use(express.static('public'));
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname,
-    `/index.html`), function (err) {
-    })
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
 // })
 
 // app.use(express.static('public'));
