@@ -6,6 +6,12 @@ const db = knex({
   client: 'pg',
   connection: DATABASE_URL,
 })
+
+
+app.set('db', db)
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+
 // app.use(express.static('public'));
 // app.get('/*', function (req, res) {
 //   res.sendFile(path.join(__dirname,
@@ -80,5 +86,3 @@ const db = knex({
 //   })
 // })
 
-app.set('db', db)
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
