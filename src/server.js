@@ -6,10 +6,10 @@ const db = knex({
   client: 'pg',
   connection: DATABASE_URL,
 })
-// app.use(express.static('public'));
-app.get('/api/*', function(req, res) {
+app.use(express.static('public'));
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 
-    `public/index.html`), function(err) {
+    `/index.html`), function(err) {
     if (err) {
       res.status(500).send(err)
     }
