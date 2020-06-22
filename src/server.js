@@ -7,7 +7,7 @@ const db = knex({
   connection: DATABASE_URL,
 })
 app.use(express.static('public'));
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 
     `/index.html`), function(err) {
     if (err) {
