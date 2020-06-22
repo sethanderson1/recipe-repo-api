@@ -9,6 +9,7 @@ const usersRouter = require('./users/users-router')
 const authRouter = require('./auth/auth-router')
 const categoriesRouter = require('./categories/categories-router')
 const recipesRouter = require('./recipes/recipes-router')
+const path = require('path'); 
 
 const app = express()
 
