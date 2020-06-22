@@ -9,12 +9,22 @@ const db = knex({
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 
-    `build/index.html`), function(err) {
+    `/index.html`), function(err) {
     if (err) {
       res.status(500).send(err)
     }
   })
 })
+
+
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, 
+//     `build/index.html`), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
 
 app.set('db', db)
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
