@@ -9,7 +9,7 @@ const db = knex({
 // app.use(express.static('public'));
 app.get('/api/*', function(req, res) {
   res.sendFile(path.join(__dirname, 
-    `/index.html`), function(err) {
+    `public/index.html`), function(err) {
     if (err) {
       res.status(500).send(err)
     }
