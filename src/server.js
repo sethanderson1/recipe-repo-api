@@ -7,5 +7,14 @@ const db = knex({
   connection: DATABASE_URL,
 })
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 
+    `recipe-repo-client.now.sh/index.html`), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 app.set('db', db)
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
