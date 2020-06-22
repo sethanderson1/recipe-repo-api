@@ -6,6 +6,54 @@ const db = knex({
   client: 'pg',
   connection: DATABASE_URL,
 })
+app.use(express.static('public'));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname,
+    `/index.html`), function (err) {
+    })
+// })
+
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+
+// app.use(express.static('public'));
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname,
+//     `/index.html`), function (err) {
+//     })
+// })
+
 // app.use(express.static('public'));
 // app.get('/*', function (req, res) {
 //   res.sendFile(path.join(__dirname,
@@ -18,9 +66,9 @@ const db = knex({
 
 
 // app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('/*', (req, res) => {
-  res.sendfile(path.join(__dirname,'build/index.html'));
-})
+// app.get('/*', (req, res) => {
+//   res.sendfile(path.join(__dirname,'build/index.html'));
+// })
 
 
 // app.get('/*', function(req, res) {

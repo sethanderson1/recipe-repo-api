@@ -23,6 +23,13 @@ app.use(cors())
 // );
 app.use(helmet())
 
+app.use(express.static('public'));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname,
+    `/index.html`), function (err) {
+    })
+})
+
 app.use(`/api/users`, usersRouter)
 app.use(`/api/auth`, authRouter)
 app.use(`/api/categories`, categoriesRouter)
