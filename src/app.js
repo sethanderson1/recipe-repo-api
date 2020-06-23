@@ -26,7 +26,7 @@ app.use(helmet())
 
 // app.use(express.static('public'));
 app.use(express.static('build'));
-app.get('/*', function (req, res) {
+app.get('/api/*', function (req, res) {
   res.sendFile(path.join(__dirname,
     `/index.html`), function (err) {
     })
