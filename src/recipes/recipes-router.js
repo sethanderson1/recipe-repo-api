@@ -43,7 +43,7 @@ recipesRouter
             category_id,
             author_id
         }
-        console.log('newRecipe', newRecipe)
+        // console.log('newRecipe', newRecipe)
 
         if (!newRecipe.title) {
             return res.status(400).json({
@@ -66,7 +66,7 @@ recipesRouter
             newRecipe
         )
             .then(recipe => {
-                console.log('recipe', recipe)
+                // console.log('recipe', recipe)
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${recipe.id}`))
@@ -80,7 +80,7 @@ recipesRouter
     .route('/:recipe_id')
     .all(requireAuth)
     .all((req, res, next) => {
-        console.log(':recipe_id path')
+        // console.log(':recipe_id path')
         const { id } = req.user
         RecipesService.getById(
             req.app.get('db'),
@@ -97,7 +97,7 @@ recipesRouter
                         })
                 }
                 if (recipe.author_id !== id) {
-                    console.log('Forbidden path')
+                    // console.log('Forbidden path')
                     return res.status(403)
                         .json({
                             error: {
@@ -111,7 +111,7 @@ recipesRouter
             .catch(next)
     })
     .get((req, res, next) => {
-        console.log(':recipe_id path')
+        // console.log(':recipe_id path')
 
         res.status(200).json(RecipesService.serializeRecipe(res.recipe))
     })

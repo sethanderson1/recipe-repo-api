@@ -66,7 +66,6 @@ categoriesRouter
             category_id
         )
             .then(category => {
-                console.log('console log works here')
                 if (!category) {
 
                     return res
@@ -77,7 +76,7 @@ categoriesRouter
                             }
                         })
                 }
-                console.log('category', category)
+                // console.log('category', category)
                 if (category.author_id !== id) {
                     return res.status(403)
                         .json({

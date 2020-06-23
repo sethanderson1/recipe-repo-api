@@ -12,8 +12,8 @@ const categoriesRouter = require('./categories/categories-router')
 const recipesRouter = require('./recipes/recipes-router')
 
 const app = express()
-console.log('NODE_ENV', NODE_ENV)
-console.log('CLIENT_ORIGIN', CLIENT_ORIGIN)
+// console.log('NODE_ENV', NODE_ENV)
+// console.log('CLIENT_ORIGIN', CLIENT_ORIGIN)
 const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 app.use(morgan(morganSetting))
 // or just 

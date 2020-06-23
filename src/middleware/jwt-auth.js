@@ -10,7 +10,7 @@ function requireAuth(req, res, next) {
         return res.status(401).json({ error: 'Missing bearer token' });
     } else {
         bearerToken = authToken.slice(7, authToken.length);
-        console.log('bearerToken', bearerToken)
+        // console.log('bearerToken', bearerToken)
 
     }
 
