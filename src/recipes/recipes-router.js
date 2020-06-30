@@ -47,7 +47,7 @@ recipesRouter
 
         if (!newRecipe.title) {
             return res.status(400).json({
-                error: { message: `Must at least contain a title` }
+                error: { message:  `Missing 'title' in request body` }
             })
         }
 
