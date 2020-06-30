@@ -35,11 +35,14 @@ categoriesRouter
         const { category_name, author_id } = req.body
         const newCategory = { category_name, author_id }
         const db = req.app.get('db')
-        for (const [key, value] of Object.entries(newCategory))
-            if (value == null)
+        for (const [key, value] of Object.entries(newCategory)) {
+            if (value == null) {
                 return res.status(400).json({
                     error: { message: `Missing '${key}' in request body` }
                 })
+            }
+        }
+
 
         CategoriesService.insertCategory(
             db,
@@ -111,7 +114,7 @@ categoriesRouter
         if (numberOfValues === 0) {
             return res.json({
                 error: {
-                    message: `Request body must contain 'category_name`
+                    message: `Missing 'category_name' in request body`
                 }
             })
         }

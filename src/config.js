@@ -12,4 +12,4 @@ module.exports = {
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET || 'secret',
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET || 'refresh-secret',
   JWT_EXPIRY: process.env.JWT_EXPIRY || '1h'
-}
+};
