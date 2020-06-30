@@ -29,7 +29,6 @@ describe('Users Endpoints', () => {
 
 
     afterEach('cleanup', () => db.raw(
-        // todo: what's this mean?
         `TRUNCATE
             users
             RESTART IDENTITY CASCADE`

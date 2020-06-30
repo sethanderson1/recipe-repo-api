@@ -9,5 +9,3 @@ CREATE TABLE recipes (
     category_id INTEGER 
         REFERENCES categories(id) ON DELETE CASCADE NOT NULL
 );
-
--- todo: make sure either change not nulls or have client insert '' when user doesnt enter data

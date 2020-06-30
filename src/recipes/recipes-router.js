@@ -51,22 +51,11 @@ recipesRouter
             })
         }
 
-        // for (const [key, value] of Object.entries(newRecipe)) {
-        //     if (!value) {
-        //         console.log('value', value)
-        //         return res.status(400).json({
-        //             error: { message: `Missing '${key}' in request body` }
-        //         })
-        //     }
-        // }
-
-
         RecipesService.insertRecipe(
             req.app.get('db'),
             newRecipe
         )
             .then(recipe => {
-                // console.log('recipe', recipe)
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${recipe.id}`))
@@ -140,14 +129,11 @@ recipesRouter
             date_modified: new Date()
         }
 
-        // const numberOfValues = Object.values(recipeToUpdate).filter(Boolean).length
-        // if (numberOfValues === 0) {
-        //     return res.json({
-        //         error: {
-        //             message: `Request body must either contain 'title or 'content'`
-        //         }
-        //     })
-        // }
+        if (!recipeToUpdate.title) {
+            return res.status(400).json({
+                error: { message:  `Missing 'title' in request body` }
+            })
+        }
 
         RecipesService.updateRecipe(
             req.app.get('db'),

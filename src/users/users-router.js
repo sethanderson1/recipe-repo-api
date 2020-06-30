@@ -5,8 +5,6 @@ const UsersService = require('./users-service')
 const usersRouter = express.Router()
 const jsonParser = express.json()
 
-// todo: add delete method
-
 usersRouter
     .route('/')
     .get(async (req, res, next) => {
@@ -59,7 +57,6 @@ usersRouter
             const newUser = {
                 user_name,
                 password: hashedPassword,
-                // date_created: 'now()'
             }
             const user = await UsersService.insertUser(knexInstance, newUser)
             res.status(201)

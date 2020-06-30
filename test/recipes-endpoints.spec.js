@@ -73,8 +73,6 @@ describe('Categories Endpoints', () => {
                     category_id: testCategories[0].id,
                     author_id: testUsers[0].id
                 }
-                console.log('testUsers[0].id', testUsers[0].id)
-                console.log('newRecipe', newRecipe)
                 return supertest(app)
                     .post('/api/recipes')
                     .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
