@@ -1,7 +1,7 @@
 const knex = require('knex');
 const bcrypt = require('bcryptjs');
 const app = require('../src/app');
-const helpers = require('./test-helpers')
+const helpers = require('./test-helpers');
 
 
 describe('Users Endpoints', () => {
@@ -20,7 +20,6 @@ describe('Users Endpoints', () => {
 
     after('disconnect from db', () => db.destroy())
 
-    // before('cleanup', () => db('users').truncate())
     before('cleanup', () => db.raw(
         `TRUNCATE
             users
@@ -35,7 +34,6 @@ describe('Users Endpoints', () => {
     ))
 
     beforeEach('insert users', () => helpers.seedUsers(db, testUsers));
-
 
     describe('POST /api/users', () => {
         ['user_name', 'password'].forEach(field => {
@@ -68,9 +66,6 @@ describe('Users Endpoints', () => {
                         error: { message: `Username already taken` }
                     })
             })
-
-
-            //  todo: do password tests if have time
         })
 
 
@@ -86,14 +81,13 @@ describe('Users Endpoints', () => {
                     .send(newUser)
                     .expect(201)
                     .expect(res => {
-                        expect(res.body).to.have.property('id')
-                        expect(res.body).to.not.have.property('password')
-                        expect(res.body.user_name).to.eql(newUser.user_name)
-                        expect(res.headers.location).to.eql(`/api/users/${res.body.id}`)
-                        // todo: might have to adjust date stuff
-                        const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' })
-                        const actualDate = new Date(res.body.date_created).toLocaleString('en', { timeZone: 'UTC' })
-                        expect(actualDate).to.eql(expectedDate)
+                        expect(res.body).to.have.property('id');
+                        expect(res.body).to.not.have.property('password');
+                        expect(res.body.user_name).to.eql(newUser.user_name);
+                        expect(res.headers.location).to.eql(`/api/users/${res.body.id}`);
+                        const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' });
+                        const actualDate = new Date(res.body.date_created).toLocaleString('en', { timeZone: 'UTC' });
+                        expect(actualDate).to.eql(expectedDate);
                     })
                     .expect(res =>
                         db
@@ -102,18 +96,17 @@ describe('Users Endpoints', () => {
                             .where({ id: res.body.id })
                             .first()
                             .then(row => {
-                                expect(row.user_name).to.eql(newUser.user_name)
-                                // todo: understand dates if have time
-                                const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' })
-                                const actualDate = new Date(row.date_created).toLocaleString('en', { timeZone: 'UTC' })
-                                expect(actualDate).to.eql(expectedDate)
-                                return bcrypt.compare(newUser.password, row.password)
+                                expect(row.user_name).to.eql(newUser.user_name);
+                                const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' });
+                                const actualDate = new Date(row.date_created).toLocaleString('en', { timeZone: 'UTC' });
+                                expect(actualDate).to.eql(expectedDate);
+                                return bcrypt.compare(newUser.password, row.password);
                             })
                             .then(compareMatch => {
-                                expect(compareMatch).to.be.true
+                                expect(compareMatch).to.be.true;
                             })
-                    )
-            })
-        })
-    })
-})
+                    );
+            });
+        });
+    });
+});

@@ -136,7 +136,7 @@ function makeAuthHeader(user, secret = process.env.ACCESS_TOKEN_SECRET) {
     algorithm: "HS256",
   });
   return `Bearer ${token}`;
-}
+};
 
 module.exports = {
   makeUsersArray,
@@ -146,4 +146,4 @@ module.exports = {
   makeRecipesArray,
   seedRecipes,
   makeAuthHeader
-}
+};

@@ -17,7 +17,6 @@ describe('Auth Endpoints', function () {
     });
     after('disconnect from db', () => db.destroy());
 
-    // before('cleanup', () => db('users').truncate())
     before('cleanup', () => db.raw(
         `TRUNCATE
             users
@@ -26,15 +25,10 @@ describe('Auth Endpoints', function () {
 
 
     afterEach('cleanup', () => db.raw(
-        // todo: what's this mean?
         `TRUNCATE
             users
             RESTART IDENTITY CASCADE`
     ))
-
-    // // can this also go here instead
-    // beforeEach('insert users', () => helpers.seedUsers(db, testUsers));
-
 
     // BEGIN TEST CASES
 
@@ -95,7 +89,7 @@ describe('Auth Endpoints', function () {
                 .send(validUser)
                 .expect(200, {
                     authToken: expectedToken
-                })
-        })
-    })
-})
+                });
+        });
+    });
+});

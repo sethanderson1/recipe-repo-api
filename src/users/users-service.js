@@ -12,7 +12,6 @@ const UsersService = {
     },
     insertUser(knex, newUser) {
         newUser.user_name = newUser.user_name.toLowerCase();
-        console.log('newUser', newUser)
         return knex
             .insert(newUser)
             .into('users')

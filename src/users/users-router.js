@@ -11,7 +11,6 @@ usersRouter
         try {
             const knexInstance = req.app.get('db');
             const { user_name, password } = req.body;
-            console.log('user_name', user_name)
             for (const field of ['user_name', 'password']) {
                 if (!req.body[field]) {
                     return res.status(400).json({
@@ -25,13 +24,12 @@ usersRouter
                 user_name
             )
                 .then(hasName => {
-                    console.log('hasName', hasName)
                     if (hasName) {
                         return res.status(400).json({
                             error: { message: `Username already taken` }
                         })
                     }
-                })
+                });
 
             // validate password
             if (UsersService.validatePassword(password)) {

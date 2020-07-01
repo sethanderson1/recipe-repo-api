@@ -1,7 +1,7 @@
 const knex = require('knex');
 const bcrypt = require('bcryptjs');
 const app = require('../src/app');
-const helpers = require('./test-helpers')
+const helpers = require('./test-helpers');
 
 describe('Categories Endpoints', () => {
 
@@ -17,9 +17,9 @@ describe('Categories Endpoints', () => {
             connection: process.env.TEST_DATABASE_URL
         })
         app.set('db', db)
-    })
+    });
 
-    after('disconnect from db', () => db.destroy())
+    after('disconnect from db', () => db.destroy());
 
     before('cleanup', () => db.raw(
         `TRUNCATE
@@ -27,7 +27,7 @@ describe('Categories Endpoints', () => {
            categories,
            users
         RESTART IDENTITY CASCADE`
-    ))
+    ));
 
     afterEach('cleanup', () => db.raw(
         `TRUNCATE
@@ -35,7 +35,7 @@ describe('Categories Endpoints', () => {
            categories,
            users
         RESTART IDENTITY CASCADE`
-    ))
+    ));
 
     beforeEach('insert users', () => helpers.seedUsers(db, testUsers));
     beforeEach('insert categories', () => helpers.seedCategories(db, testCategories));
@@ -82,8 +82,8 @@ describe('Categories Endpoints', () => {
                         expect(res.body).to.have.property('id')
                         expect(res.body.title).to.eql(newRecipe.title)
                         expect(res.headers.location).to.eql(`/api/recipes/${res.body.id}`)
-                    })
-            })
-        })
-    })
-})
+                    });
+            });
+        });
+    });
+});
