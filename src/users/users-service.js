@@ -5,52 +5,52 @@ const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*
 
 const UsersService = {
     getAllUsers(knex) {
-        return knex.select('*').from('users')
+        return knex.select('*').from('users');
     },
     hashPassword(password) {
-        return bcrypt.hash(password, 10)
+        return bcrypt.hash(password, 10);
     },
     insertUser(knex, newUser) {
+        newUser.user_name = newUser.user_name.toLowerCase();
+        console.log('newUser', newUser)
         return knex
             .insert(newUser)
             .into('users')
             .returning('*')
             .then(rows => {
                 return rows[0]
-            })
+            });
     },
     hasUserWithUserName(knex, user_name) {
-        // todo: not worry about case insensitive 
-        // user_name = user_name.toLowerCase();
+        user_name = user_name.toLowerCase();
         return knex.select('*')
             .from('users')
-            .where({ user_name })
+            .where({user_name})
             .first()
-            .then(user => !!user)
+            .then(user => !!user);
     },
     validatePassword(password) {
         if (password.length < 8) {
             return 'Password must be longer than 8 characters';
-        }
+        };
         if (password.length > 72) {
             return 'Password must be less than 72 characters';
-        }
+        };
         if (password.startsWith(' ') || password.endsWith(' ')) {
             return 'Password must not start or end with empty spaces';
-        }
+        };
         if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
             return 'Password must contain 1 upper case, lower case, number and special character';
-        }
+        };
     },
     serializeUser(user) {
         return {
             id: user.id,
             user_name: xss(user.user_name),
-            // todo: do i need password? should not be in res.body? so not here either?
             date_created: user.date_created,
             date_modified: null,
-        }
+        };
     }
-}
+};
 
 module.exports = UsersService

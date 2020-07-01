@@ -2,7 +2,7 @@ const xss = require('xss')
 
 const RecipesService = {
     getAllRecipes(knex) {
-        return knex.select('*').from('recipes')
+        return knex.select('*').from('recipes');
     },
 
     insertRecipe(knex, newRecipe) {
@@ -12,7 +12,7 @@ const RecipesService = {
             .returning('*')
             .then(rows => {
                 return rows[0]
-            })
+            });
     },
 
     getById(knex, id) {
@@ -20,19 +20,19 @@ const RecipesService = {
             .select('*')
             .from('recipes')
             .where('id', id)
-            .first()
+            .first();
     },
 
     deleteRecipe(knex, id) {
         return knex('recipes')
             .where('id', id)
-            .delete()
+            .delete();
     },
 
     updateRecipe(knex, id, newRecipeFields) {
         return knex('recipes')
             .where({ id })
-            .update(newRecipeFields)
+            .update(newRecipeFields);
     },
     serializeRecipe(recipe) {
         return {
@@ -42,12 +42,11 @@ const RecipesService = {
             ingredients: xss(recipe.ingredients),
             directions: xss(recipe.directions),
             category_id: recipe.category_id,
-        }
+        };
     }
+};
 
-}
-
-module.exports =  RecipesService 
+module.exports = RecipesService;
 
 
 

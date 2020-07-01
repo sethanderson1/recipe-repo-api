@@ -23,26 +23,26 @@ app.use(
         origin: CLIENT_ORIGIN
     })
 );
-app.use(helmet())
+app.use(helmet());
 
-app.use(`/api/users`, usersRouter)
-app.use(`/api/auth`, authRouter)
-app.use(`/api/categories`, categoriesRouter)
-app.use(`/api/recipes`, recipesRouter)
+app.use(`/api/users`, usersRouter);
+app.use(`/api/auth`, authRouter);
+app.use(`/api/categories`, categoriesRouter);
+app.use(`/api/recipes`, recipesRouter);
 
-app.get('/api/hello', (req, res) => {
-    res.send('Hello, world!');
-});
+// app.get('/api/hello', (req, res) => {
+//     res.send('Hello, world!');
+// });
 
 app.use(function errorHandler(error, req, res, next) {
-    let response
+    let response;
     if (NODE_ENV === 'production') {
-        response = { error: { message: 'server error' } }
+        response = { error: { message: 'server error' } };
     } else {
-        console.error(error)
-        response = { message: error.message, error }
+        console.error(error);
+        response = { message: error.message, error };
     }
-    res.status(500).json(response)
+    res.status(500).json(response);
 })
 
 module.exports = app

@@ -1,17 +1,17 @@
 const CategoriesService = {
-    getAllCategories(knex,user_id) {
+    getAllCategories(knex, user_id) {
         return knex.select('*')
-        .from('categories')
+            .from('categories');
     },
 
-    insertCategory(knex,newCategory) {
+    insertCategory(knex, newCategory) {
         return knex
             .insert(newCategory)
             .into('categories')
             .returning('*')
             .then(rows => {
                 return rows[0]
-            })
+            });
     },
 
     getById(knex, id) {
@@ -19,21 +19,20 @@ const CategoriesService = {
             .select('*')
             .from('categories')
             .where('id', id)
-            .first()
+            .first();
     },
 
     deleteCategory(knex, id) {
         return knex('categories')
             .where('id', id)
-            .delete()
+            .delete();
     },
 
     updateCategory(knex, id, newCategoryFields) {
         return knex('categories')
             .where({ id })
-            .update(newCategoryFields)
-    } 
-
-}
+            .update(newCategoryFields);
+    }
+};
 
 module.exports = CategoriesService

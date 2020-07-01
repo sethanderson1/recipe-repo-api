@@ -1,17 +1,17 @@
-const path = require('path')
-const express = require('express')
-const xss = require('xss')
-const CategoriesService = require('./categories-service')
-const { requireAuth } = require('../middleware/jwt-auth')
-const categoriesRouter = express.Router()
-const jsonParser = express.json()
+const path = require('path');
+const express = require('express');
+const xss = require('xss');
+const CategoriesService = require('./categories-service');
+const { requireAuth } = require('../middleware/jwt-auth');
+const categoriesRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeCategory = category => {
     return {
         id: category.id,
         category_name: xss(category.category_name),
-    }
-}
+    };
+};
 categoriesRouter
     .route('/')
     .all(requireAuth)
@@ -23,25 +23,25 @@ categoriesRouter
             const categories = await CategoriesService
                 .getAllCategories(db, id)
             const ownedCategories = categories
-                .filter(category => category.author_id === id)
-            res.json(ownedCategories.map(serializeCategory))
+                .filter(category => category.author_id === id);
+            res.json(ownedCategories.map(serializeCategory));
         } catch (err) {
             next()
-        }
+        };
     })
     .post(jsonParser, (req, res, next) => {
-        const { id } = req.user
-        req.body.author_id = id
-        const { category_name, author_id } = req.body
-        const newCategory = { category_name, author_id }
-        const db = req.app.get('db')
+        const { id } = req.user;
+        req.body.author_id = id;
+        const { category_name, author_id } = req.body;
+        const newCategory = { category_name, author_id };
+        const db = req.app.get('db');
         for (const [key, value] of Object.entries(newCategory)) {
             if (value == null) {
                 return res.status(400).json({
                     error: { message: `Missing '${key}' in request body` }
-                })
-            }
-        }
+                });
+            };
+        };
 
 
         CategoriesService.insertCategory(
@@ -54,16 +54,16 @@ categoriesRouter
                     .location(path.posix.join(req.originalUrl, `/${category.id}`))
                     .json(serializeCategory(category))
             })
-            .catch(next)
-    })
+            .catch(next);
+    });
 
 categoriesRouter
     .route('/:category_id')
     .all(requireAuth)
     .all((req, res, next) => {
-        const { id } = req.user
-        const { category_id } = req.params
-        const db = req.app.get('db')
+        const { id } = req.user;
+        const { category_id } = req.params;
+        const db = req.app.get('db');
         CategoriesService.getById(
             db,
             category_id
@@ -78,7 +78,7 @@ categoriesRouter
                                 message: `Category doesn't exist`
                             }
                         })
-                }
+                };
                 // console.log('category', category)
                 if (category.author_id !== id) {
                     return res.status(403)
@@ -86,15 +86,15 @@ categoriesRouter
                             error: {
                                 message: `Forbidden`
                             }
-                        })
-                }
-                res.category = category
-                next()
+                        });
+                };
+                res.category = category;
+                next();
             })
-            .catch(next)
+            .catch(next);
     })
     .get((req, res, next) => {
-        res.status(200).json(serializeCategory(res.category))
+        res.status(200).json(serializeCategory(res.category));
     })
     .delete((req, res, next) => {
         CategoriesService.deleteCategory(
@@ -109,24 +109,23 @@ categoriesRouter
     .patch(jsonParser, (req, res, next) => {
         const { category_name } = req.body
         const categoryToUpdate = { category_name }
-
         const numberOfValues = Object.values(categoryToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
             return res.json({
                 error: {
                     message: `Missing 'category_name' in request body`
                 }
-            })
-        }
+            });
+        };
         CategoriesService.updateCategory(
             req.app.get('db'),
             req.params.category_id,
             categoryToUpdate
         )
             .then(numRowsAffected => {
-                res.status(204).end()
+                res.status(204).end();
             })
-            .catch(next)
-    })
+            .catch(next);
+    });
 
 module.exports = categoriesRouter

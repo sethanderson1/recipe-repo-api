@@ -1,9 +1,9 @@
-const path = require('path')
-const express = require('express')
-const RecipesService = require('./recipes-service')
-const recipesRouter = express.Router()
-const jsonParser = express.json()
-const { requireAuth } = require('../middleware/jwt-auth')
+const path = require('path');
+const express = require('express');
+const RecipesService = require('./recipes-service');
+const recipesRouter = express.Router();
+const jsonParser = express.json();
+const { requireAuth } = require('../middleware/jwt-auth');
 
 
 recipesRouter
@@ -20,21 +20,21 @@ recipesRouter
                 .filter(category => category.author_id === id)
             res.json(ownedRecipes.map(recipe => {
                 return RecipesService.serializeRecipe(recipe)
-            }))
+            }));
         } catch (err) {
-            next()
-        }
+            next();
+        };
     })
     .post(jsonParser, (req, res, next) => {
-        const { id } = req.user
-        req.body.author_id = id
+        const { id } = req.user;
+        req.body.author_id = id;
 
         const { title,
             description,
             ingredients,
             directions,
             category_id,
-            author_id } = req.body
+            author_id } = req.body;
         const newRecipe = {
             title,
             description,
@@ -42,14 +42,13 @@ recipesRouter
             directions,
             category_id,
             author_id
-        }
-        // console.log('newRecipe', newRecipe)
+        };
 
         if (!newRecipe.title) {
             return res.status(400).json({
-                error: { message:  `Missing 'title' in request body` }
-            })
-        }
+                error: { message: `Missing 'title' in request body` }
+            });
+        };
 
         RecipesService.insertRecipe(
             req.app.get('db'),
@@ -59,17 +58,15 @@ recipesRouter
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${recipe.id}`))
-                    .json(RecipesService.serializeRecipe(recipe))
+                    .json(RecipesService.serializeRecipe(recipe));
             })
-            .catch(err => console.log(err))
-            // .next()
-    })
+            .catch(err);
+    });
 
 recipesRouter
     .route('/:recipe_id')
     .all(requireAuth)
     .all((req, res, next) => {
-        // console.log(':recipe_id path')
         const { id } = req.user
         RecipesService.getById(
             req.app.get('db'),
@@ -92,17 +89,15 @@ recipesRouter
                             error: {
                                 message: `Forbidden`
                             }
-                        })
-                }
-                res.recipe = recipe
-                next()
+                        });
+                };
+                res.recipe = recipe;
+                next();
             })
-            .catch(next)
+            .catch(next);
     })
     .get((req, res, next) => {
-        // console.log(':recipe_id path')
-
-        res.status(200).json(RecipesService.serializeRecipe(res.recipe))
+        res.status(200).json(RecipesService.serializeRecipe(res.recipe));
     })
     .delete((req, res, next) => {
         RecipesService.deleteRecipe(
@@ -110,16 +105,16 @@ recipesRouter
             req.params.recipe_id
         )
             .then(numRowsAffected => {
-                res.status(204).end()
+                res.status(204).end();
             })
-            .catch(next)
+            .catch(next);
     })
     .patch(jsonParser, (req, res, next) => {
         const { title,
             description,
             ingredients,
             directions,
-            category_id } = req.body
+            category_id } = req.body;
         const recipeToUpdate = {
             title,
             description,
@@ -127,13 +122,13 @@ recipesRouter
             directions,
             category_id,
             date_modified: new Date()
-        }
+        };
 
         if (!recipeToUpdate.title) {
             return res.status(400).json({
-                error: { message:  `Missing 'title' in request body` }
-            })
-        }
+                error: { message: `Missing 'title' in request body` }
+            });
+        };
 
         RecipesService.updateRecipe(
             req.app.get('db'),
@@ -141,10 +136,9 @@ recipesRouter
             recipeToUpdate
         )
             .then(numRowsAffected => {
-                res.status(204).end()
+                res.status(204).end();
             })
-            .catch(err => console.log(err))
-            // .next()
-    })
+            .catch(err);
+    });
 
-module.exports = recipesRouter
+module.exports = recipesRouter;
