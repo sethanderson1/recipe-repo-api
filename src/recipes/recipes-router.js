@@ -10,7 +10,6 @@ recipesRouter
     .route('/')
     .all(requireAuth)
     .get(async (req, res, next) => {
-        // console.log('req.user', req.user)
         const { id } = req.user
         const db = req.app.get('db')
         try {
@@ -60,7 +59,8 @@ recipesRouter
                     .location(path.posix.join(req.originalUrl, `/${recipe.id}`))
                     .json(RecipesService.serializeRecipe(recipe));
             })
-            .catch(err);
+            .catch(err => console.log('err', err));
+            
     });
 
 recipesRouter
@@ -138,7 +138,7 @@ recipesRouter
             .then(numRowsAffected => {
                 res.status(204).end();
             })
-            .catch(err);
+            .catch(err => console.log('err', err));
     });
 
 module.exports = recipesRouter;

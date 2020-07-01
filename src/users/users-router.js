@@ -26,7 +26,7 @@ usersRouter
                 .then(hasName => {
                     if (hasName) {
                         return res.status(400).json({
-                            error: { message: `Username already taken` }
+                            error: { message: `Email already taken` }
                         })
                     }
                 });

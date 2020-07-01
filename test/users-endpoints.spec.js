@@ -54,7 +54,7 @@ describe('Users Endpoints', () => {
                     })
             })
 
-            it(`responds with 400 error when username already exists`, () => {
+            it(`responds with 400 error when email already exists`, () => {
                 const newUser = {
                     user_name: testUsers[0].user_name,
                     password: 'Password1!',
@@ -63,7 +63,7 @@ describe('Users Endpoints', () => {
                     .post('/api/users/')
                     .send(newUser)
                     .expect(400, {
-                        error: { message: `Username already taken` }
+                        error: { message: `Email already taken` }
                     })
             })
         })
@@ -72,7 +72,7 @@ describe('Users Endpoints', () => {
         context('Happy path', () => {
             it(`responds 201, serialized user, storing bcrypted password`, () => {
                 const newUser = {
-                    user_name: 'testUser1@gmail.com',
+                    user_name: 'testuser1@gmail.com',
                     password: 'Password1!',
                 };
 

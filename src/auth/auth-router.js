@@ -6,7 +6,7 @@ const jsonParser = express.json();
 authRouter
     .route('/login')
     .post(jsonParser, async (req, res, next) => {
-        req.body.user_name = req.body.user_name.toLowerCase();
+        req.body.user_name = req.body.user_name && req.body.user_name.toLowerCase();
         const { user_name, password } = req.body;
         const loginUser = { user_name, password };
         const knexInstance = req.app.get('db');
@@ -29,7 +29,7 @@ authRouter
             if (!dbUser) {
                 return res.status(400)
                     .json({
-                        error: { message: `Incorrect username or password` }
+                        error: { message: `Incorrect email or password` }
                     });
             };
             const passwordsMatch = await AuthService
@@ -40,7 +40,7 @@ authRouter
             if (!passwordsMatch) {
                 return res.status(400)
                     .json({
-                        error: { message: `Incorrect username or password` }
+                        error: { message: `Incorrect email or password` }
                     });
             };
 

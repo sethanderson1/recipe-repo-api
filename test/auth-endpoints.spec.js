@@ -49,24 +49,23 @@ describe('Auth Endpoints', function () {
                     .send(loginInfo)
                     .expect(400, {
                         error: { message: `Missing '${field}' in request body` }
-                    })
-                    ;
-            })
-        })
+                    });
+            });
+        });
 
-        it('responds with 400 error when bad username', () => {
+        it('responds with 400 error when bad email', () => {
             const invalidUser = { user_name: 'invalid-name', password: 'password1' };
             return supertest(app)
                 .post('/api/auth/login')
                 .send(invalidUser)
-                .expect(400, { error: { message: 'Incorrect username or password' } })
+                .expect(400, { error: { message: 'Incorrect email or password' } })
         })
         it('responds with 400 error when bad password', () => {
             const invalidUser = { user_name: testUser.user_name, password: 'invalid-pass' };
             return supertest(app)
                 .post('/api/auth/login')
                 .send(invalidUser)
-                .expect(400, { error: { message: 'Incorrect username or password' } })
+                .expect(400, { error: { message: 'Incorrect email or password' } })
         })
 
         it('responds with 200 and JWT when credentials valid', () => {
