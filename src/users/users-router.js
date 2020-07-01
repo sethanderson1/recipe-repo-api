@@ -8,6 +8,8 @@ const jsonParser = express.json();
 usersRouter
     .route('/')
     .post(jsonParser, async (req, res, next) => {
+        console.log('post attempted')
+
         try {
             const knexInstance = req.app.get('db');
             const { user_name, password } = req.body;
@@ -26,7 +28,7 @@ usersRouter
                 .then(hasName => {
                     if (hasName) {
                         return res.status(400).json({
-                            error: { message: `Email already taken` }
+                            error: { message: `*Email already in use` }
                         })
                     }
                 });

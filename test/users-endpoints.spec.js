@@ -63,7 +63,7 @@ describe('Users Endpoints', () => {
                     .post('/api/users/')
                     .send(newUser)
                     .expect(400, {
-                        error: { message: `Email already taken` }
+                        error: { message: `*Email already in use` }
                     })
             })
         })
