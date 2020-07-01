@@ -138,7 +138,7 @@ recipesRouter
             .then(numRowsAffected => {
                 res.status(204).end();
             })
-            .catch(err => console.log('err', err));
+            .catch(err);
     });
 
 module.exports = recipesRouter;
