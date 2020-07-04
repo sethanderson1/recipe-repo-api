@@ -1,5 +1,12 @@
 # RECIPE REPO API
 
+## Live App
+
+https://recipe-repo-client.now.sh/
+
+### API Endpoint
+https://tranquil-badlands-46681.herokuapp.com/
+
 ## Open Endpoints
 
 Open endpoints require no Authentication.
@@ -22,9 +29,6 @@ has permissions to access.
 
 * Get all recipes : `GET /api/recipes/`
 * Get specific recipe : `GET /api/recipes/:recipeId`
-
-* Get specific category : `GET /api/categories/:categoryId`
-* Get specific category : `GET /api/categories/:categoryId`
 
 ## Technology
 
