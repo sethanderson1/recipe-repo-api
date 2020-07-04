@@ -10,13 +10,15 @@ recipesRouter
     .route('/')
     .all(requireAuth)
     .get(async (req, res, next) => {
-        const { id } = req.user
-        const db = req.app.get('db')
+        console.log('get endpoint reached')
+        const { id } = req.user;
+        console.log('id', id)
+        const db = req.app.get('db');
         try {
             const recipes = await RecipesService
-                .getAllRecipes(db, id)
+                .getAllRecipes(db, id);
             const ownedRecipes = recipes
-                .filter(category => category.author_id === id)
+                .filter(category => category.author_id === id);
             res.json(ownedRecipes.map(recipe => {
                 return RecipesService.serializeRecipe(recipe)
             }));
@@ -60,7 +62,7 @@ recipesRouter
                     .json(RecipesService.serializeRecipe(recipe));
             })
             .catch(err => console.log('err', err));
-            
+
     });
 
 recipesRouter

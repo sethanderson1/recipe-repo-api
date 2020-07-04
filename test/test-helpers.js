@@ -93,7 +93,8 @@ function makeRecipesArray() {
       directions: 'recipe1 directions',
       category_id: 1,
       date_created: new Date(),
-      date_modified: new Date()
+      date_modified: new Date(),
+      author_id: 1
     },
     {
       title: 'recipe2',
@@ -103,7 +104,8 @@ function makeRecipesArray() {
       directions: 'recipe2 directions',
       category_id: 2,
       date_created: new Date(),
-      date_modified: new Date()
+      date_modified: new Date(),
+      author_id: 1
     },
     {
       title: 'recipe3',
@@ -113,7 +115,8 @@ function makeRecipesArray() {
       directions: 'recipe3 directions',
       category_id: 3,
       date_created: new Date(),
-      date_modified: new Date()
+      date_modified: new Date(),
+      author_id: 1
     }
   ]
 }
