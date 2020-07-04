@@ -11,13 +11,42 @@ https://tranquil-badlands-46681.herokuapp.com/
 
 Open endpoints require no Authentication.
 
-* Login : `POST /api/auth/`
 * SignUp : `POST /api/users/`
 
 ## Endpoints that require Authentication
 
 Closed endpoints require a valid Token to be included in the header of the
 request. A Token can be acquired from the Login view above.
+
+
+
+
+
+### Login: `POST /api/auth/`
+
+Validates the login credentials against the database and if they are valid returns a JWT
+
+**Sample request Body**
+
+```json
+{
+  "username": "example",
+  "password": "example-password"
+}
+```
+
+**Sample Response Body**
+
+```json
+{
+  "authToken": "thISisASampLEjwtAUthToKEN"
+}
+```
+
+
+
+
+* Login : `POST /api/auth/`
 
 * Get all categories : `GET /api/categories/`
 * Post a category : `POST /api/categories/`
@@ -29,8 +58,6 @@ request. A Token can be acquired from the Login view above.
 * Get a recipe : `GET /api/recipes/:recipeId`
 * Update a recipe: `PATCH /api/recipes/:recipeId`
 * Delete a recipe : `DELETE /api/recipes/:recipeId`
-
-
 
 
 
