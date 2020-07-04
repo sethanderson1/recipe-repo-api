@@ -18,11 +18,6 @@ Open endpoints require no Authentication.
 
 Closed endpoints require a valid Token to be included in the header of the
 request. A Token can be acquired from the Login view above.
-`
-### Account related
-
-Endpoints for viewing and manipulating the Accounts that the Authenticated User
-has permissions to access.
 
 * Get all categories : `GET /api/categories/`
 * Get specific category : `GET /api/categories/:categoryId`
