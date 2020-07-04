@@ -1,5 +1,5 @@
 # RECIPE REPO API
-
+Server API interface for storing and delivering "Recipe Repo" data.
 ## Live App
 
 https://recipe-repo-client.now.sh/
@@ -37,3 +37,7 @@ request. A Token can be acquired from the Login view above.
     * Knex.js for query building
     * Postgrator for versioning
 * Testing on Mocha framework using Chai and Supertest
+
+## Client Repo
+
+* https://github.com/sethanderson1/recipe-repo-client/
