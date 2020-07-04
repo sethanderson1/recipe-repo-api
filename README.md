@@ -49,7 +49,7 @@ request. A Token can be acquired from the Login view above.
 ### Get all categories `GET /api/categories/`
 Returns a list of the user's categories.
 
-**Example Request Body**
+**Example Response Body**
 
 ```json
 [
@@ -64,20 +64,28 @@ Returns a list of the user's categories.
 ]
 ```
 
+### Post a category `POST /api/categories/`
+Posts to database. Returns 201 status code and the category name
+
+**Example Request Body**
+
+```json
+
+{ 
+    "category_name": "Dinner"
+ } 
+ 
+ ```
+
 **Example Response Body**
 
 ```json
-{
-  "id": 1,
-  "content": "test comment",
-  "post_id": 1,
-  "date_created": "2020-06-19T22:22:33.937Z",
-  "user": {
-    "id": 1,
-    "username": "exampleUser",
-    "img": "./example/img/url.png"
-  }
-}
+
+    {
+        "id": 3,
+        "category_name": "Dinner"
+    }
+    
 ```
 
 
