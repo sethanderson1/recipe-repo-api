@@ -26,9 +26,11 @@ has permissions to access.
 
 * Get all categories : `GET /api/categories/`
 * Get specific category : `GET /api/categories/:categoryId`
+* Delete a category : `DELETE /api/categories/:categoryId`
 
 * Get all recipes : `GET /api/recipes/`
 * Get specific recipe : `GET /api/recipes/:recipeId`
+* Delete a recipe : `DELETE /api/recipes/:recipeId`
 
 ## Technology
 
