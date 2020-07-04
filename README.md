@@ -13,10 +13,7 @@ Open endpoints require no Authentication.
 
 * SignUp : `POST /api/users/`
 
-## Endpoints that require Authentication
 
-Closed endpoints require a valid Token to be included in the header of the
-request. A Token can be acquired from the Login view above.
 
 
 
@@ -43,10 +40,54 @@ Validates the login credentials against the database and if they are valid retur
 }
 ```
 
+## Endpoints that require Authentication
+
+Closed endpoints require a valid Token to be included in the header of the
+request. A Token can be acquired from the Login view above.
+
+
+### Get all categories `GET /api/categories/`
+Returns a list of the user's categories.
+
+**Example Request Body**
+
+```json
+[
+    {
+        "id": 1,
+        "category_name": "Breakfast"
+    },
+    {
+        "id": 2,
+        "category_name": "Lunch"
+    }
+]
+```
+
+**Example Response Body**
+
+```json
+{
+  "id": 1,
+  "content": "test comment",
+  "post_id": 1,
+  "date_created": "2020-06-19T22:22:33.937Z",
+  "user": {
+    "id": 1,
+    "username": "exampleUser",
+    "img": "./example/img/url.png"
+  }
+}
+```
 
 
 
-* Login : `POST /api/auth/`
+
+
+
+
+
+
 
 * Get all categories : `GET /api/categories/`
 * Post a category : `POST /api/categories/`
